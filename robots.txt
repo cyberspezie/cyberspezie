@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /images/
+Disallow: /videos/
+Disallow: /sketches/
+Disallow: /tools/
+
+Sitemap: https://cyberspezie.github.io/sitemap.xml
