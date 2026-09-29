@@ -10,10 +10,10 @@
   <meta name="author" content="cyberspezie">
   <meta name="theme-color" content="#000000">
   <link rel="canonical" href="https://cyberspezie.github.io/">
-  <link rel="icon" href="favicon.ico?v=fb07b4df" sizes="32x32">
-  <link rel="icon" href="favicon-32.png?v=e07c54ae" type="image/png" sizes="32x32">
-  <link rel="icon" href="favicon.svg?v=9792f24e" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=9b0f992d">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="cyberspezie">
   <meta property="og:locale" content="en_US">
@@ -782,6 +782,23 @@
       }
     }
 
+    /* landing: the line under the title nearly touched its letters while [portfolio] above had a
+       big gap (the font has tall space over the letters, almost none under them). The title stays
+       where it is; only the two small lines move down by 5% of the title's size: [portfolio]
+       closer to it, the line under it further away (artist's request). --hero-fs = the title's
+       font size at each breakpoint (text-6xl / sm:7xl / md:8xl / lg:9xl / xl:10rem) */
+    #hero-kicker, #hero-tags { --hero-fs: 3.75rem; }
+    @media (min-width: 640px) { #hero-kicker, #hero-tags { --hero-fs: 4.5rem; } }
+    @media (min-width: 768px) { #hero-kicker, #hero-tags { --hero-fs: 6rem; } }
+    @media (min-width: 1024px) { #hero-kicker, #hero-tags { --hero-fs: 8rem; } }
+    @media (min-width: 1280px) { #hero-kicker, #hero-tags { --hero-fs: 10rem; } }
+
+    #hero-kicker,
+    #hero-tags {
+      position: relative;
+      top: calc(var(--hero-fs) * 0.05);
+    }
+
     /* No visible scrollbar (the classic white/grey one of Safari / Windows spoils the black
        page): wheel, trackpad, touch and keyboard still scroll */
     #project-page-view,
@@ -1094,12 +1111,12 @@
 
   <!-- 2. Dead-Center Hero: "cyberspezie" with Dynamic Letter Intersections -->
   <main class="fixed inset-0 z-10 pointer-events-none flex flex-col items-center justify-center p-6 select-none text-white">
-    <div class="flex items-center space-x-2 mb-3 font-mono text-[0.5625rem] sm:text-[0.625rem] tracking-widest text-neutral-400 uppercase">
+    <div id="hero-kicker" class="flex items-center space-x-2 mb-3 font-mono text-[0.5625rem] sm:text-[0.625rem] tracking-widest text-neutral-400 uppercase">
       <span>[portfolio]</span>
     </div>
     <h1 id="hero-title" class="font-jacquarda text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] tracking-tight lowercase leading-none select-none drop-shadow-[0_0_35px_rgba(255,255,255,0.3)]" style="-webkit-text-stroke: 1.5px white;"><span class="hero-letter">c</span><span class="hero-letter">y</span><span class="hero-letter">b</span><span class="hero-letter">e</span><span class="hero-letter">r</span><span class="hero-letter">s</span><span class="hero-letter">p</span><span class="hero-letter">e</span><span class="hero-letter">z</span><span class="hero-letter">i</span><span class="hero-letter">e</span></h1>
 
-    <div class="flex items-center space-x-3 sm:space-x-5 mt-4 font-mono text-[0.5625rem] sm:text-[0.625rem] tracking-widest text-neutral-400 uppercase">
+    <div id="hero-tags" class="flex items-center space-x-3 sm:space-x-5 mt-4 font-mono text-[0.5625rem] sm:text-[0.625rem] tracking-widest text-neutral-400 uppercase">
       <span>creative technology</span>
       <span>/</span>
       <span>art</span>

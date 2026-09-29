@@ -75,14 +75,12 @@ const isoMonth = year => {                               // "june 2025" / "octob
   const m = String(year).toLowerCase().match(/([a-z]+)\s+(\d{4})/);
   return m && MONTHS.includes(m[1]) ? `${m[2]}-${String(MONTHS.indexOf(m[1]) + 1).padStart(2, '0')}` : undefined;
 };
-// icons carry a content hash (?v=…): Safari keeps favicons in its own cache, which clearing
-// website data doesn't empty; a new address makes it fetch the new icon
-const iconV = f => require('crypto').createHash('md5').update(fs.readFileSync(path.join(ROOT, f))).digest('hex').slice(0, 8);
-const icon = f => `${f}?v=${iconV(f)}`;
-const ICON_LINKS = `<link rel="icon" href="${icon('favicon.ico')}" sizes="32x32">
-  <link rel="icon" href="${icon('favicon-32.png')}" type="image/png" sizes="32x32">
-  <link rel="icon" href="${icon('favicon.svg')}" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="${icon('apple-touch-icon.png')}">`;
+// plain icon addresses, no version hash: with a hash Safari showed the icon again as a dark tile
+// with a light border; these plain addresses are the ones that displayed correctly (2026-09-29)
+const ICON_LINKS = `<link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">`;
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 const person = { '@id': `${SITE}#person` };
