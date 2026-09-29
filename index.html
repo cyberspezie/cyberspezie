@@ -793,6 +793,16 @@
     @media (min-width: 1024px) { #hero-kicker, #hero-tags { --hero-fs: 8rem; } }
     @media (min-width: 1280px) { #hero-kicker, #hero-tags { --hero-fs: 10rem; } }
 
+    /* the title's glow (drop-shadow 35px): on the title itself the browser cut it at a box close
+       to the letters (on the "c" side the letters touch the box), a faint straight edge around
+       the title. It lives on a wrapper with 5rem of room on every side, given back by negative
+       margins: nothing moves, and #hero-title keeps its own size for the landscape's code */
+    #hero-glow {
+      padding: 5rem;
+      margin: -5rem;
+      filter: drop-shadow(0 0 35px rgba(255, 255, 255, 0.3));
+    }
+
     #hero-kicker,
     #hero-tags {
       position: relative;
@@ -1114,7 +1124,7 @@
     <div id="hero-kicker" class="flex items-center space-x-2 mb-3 font-mono text-[0.5625rem] sm:text-[0.625rem] tracking-widest text-neutral-400 uppercase">
       <span>[portfolio]</span>
     </div>
-    <h1 id="hero-title" class="font-jacquarda text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] tracking-tight lowercase leading-none select-none drop-shadow-[0_0_35px_rgba(255,255,255,0.3)]" style="-webkit-text-stroke: 1.5px white;"><span class="hero-letter">c</span><span class="hero-letter">y</span><span class="hero-letter">b</span><span class="hero-letter">e</span><span class="hero-letter">r</span><span class="hero-letter">s</span><span class="hero-letter">p</span><span class="hero-letter">e</span><span class="hero-letter">z</span><span class="hero-letter">i</span><span class="hero-letter">e</span></h1>
+    <div id="hero-glow"><h1 id="hero-title" class="font-jacquarda text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] tracking-tight lowercase leading-none select-none" style="-webkit-text-stroke: 1.5px white;"><span class="hero-letter">c</span><span class="hero-letter">y</span><span class="hero-letter">b</span><span class="hero-letter">e</span><span class="hero-letter">r</span><span class="hero-letter">s</span><span class="hero-letter">p</span><span class="hero-letter">e</span><span class="hero-letter">z</span><span class="hero-letter">i</span><span class="hero-letter">e</span></h1></div>
 
     <div id="hero-tags" class="flex items-center space-x-3 sm:space-x-5 mt-4 font-mono text-[0.5625rem] sm:text-[0.625rem] tracking-widest text-neutral-400 uppercase">
       <span>creative technology</span>
