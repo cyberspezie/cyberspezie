@@ -20,9 +20,37 @@ const PERSON = {
   job: 'Creative Technologist & Multidisciplinary Artist',
   city: 'Milan',
   sameAs: ['https://www.instagram.com/cyberspezie/'],
-  knowsAbout: ['creative technology', 'creative coding', 'interactive installations', 'physical computing',
-    'electronics', 'Arduino', 'TouchDesigner', 'generative art', 'artificial intelligence', 'UI/UX design',
-    'photogrammetry', 'digital art']
+  // every skill, tool and practice from the works, the bio and the artist's own list (artist's
+  // request: "the more the better"; only Google reads it)
+  knowsAbout: [
+    // practice
+    'creative technology', 'new media art', 'digital art', 'installation art', 'interactive installations',
+    'interactive design', 'audiovisual installations', 'audiovisual', 'phygital experiences', 'artistic research',
+    'art direction', 'visual design', 'visual identity', 'UI/UX design', 'UI design', 'UX design', 'interface design',
+    'Figma', 'graphic design', 'layout design', 'editorial design', 'editorial layout',
+    // code and data
+    'creative coding', 'generative art', 'programming', 'object-oriented programming', 'computer science',
+    'web development', 'front-end development', 'HTML', 'CSS', 'JavaScript', 'Python', 'C#', 'p5.js', 'API integration', 'data visualization', 'live data', 'real-time data', 'GitHub',
+    // electronics
+    'physical computing', 'electronics', 'custom electronics', 'circuit soldering', 'Arduino', 'sensors',
+    'Kinect', 'hardware prototyping',
+    // real-time visuals and sound
+    'TouchDesigner', 'cables.gl', 'audio-reactive visuals', 'real-time graphics', 'sound design',
+    'FL Studio', 'VJ', 'VJing', 'live visuals', 'light design', 'lighting design', 'digital choreography', 'dance',
+    // 3D, scanning, AR
+    'photogrammetry', '3D scanning', '3D modeling', 'augmented reality', 'Adobe Aero',
+    // AI
+    'artificial intelligence', 'AI integration', 'Fal.ai', 'AI sound',
+    // film and photography
+    'film', 'short film', 'film direction', 'directing', 'pre-production', 'storyboarding', 'video production',
+    'videography', 'camera operation', 'video editing', 'film editing', 'post-production', 'photography',
+    'digital photography', 'analog photography', '35mm film photography', 'black and white photography',
+    // animation and illustration
+    'animation', 'digital animation', 'Procreate', 'NFT art',
+    // software
+    'Adobe Creative Cloud', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe InDesign', 'Adobe Premiere Pro',
+    'Adobe After Effects', 'Adobe Lightroom', 'Adobe Audition'
+  ]
 };
 
 // Google Search Console, ownership of the URL-prefix property https://cyberspezie.github.io/
@@ -30,7 +58,9 @@ const PERSON = {
 const GOOGLE_VERIFICATION = '0aWvqDtBxg0HKCnZ7jw_tnNbqx0Z16egLxG6sRga-VE';
 
 const TITLE = `${PERSON.name} — portfolio`;
-const DESCRIPTION = `portfolio of ${PERSON.name}, creative technologist and multidisciplinary artist in milan: interactive installations, code, electronics, ai and film.`;
+// the one description used everywhere (search results, link previews, JSON-LD, noscript): chosen by
+// the artist on 2026-09-29 (no colons, no "ai": her AI use is integration, not generated content)
+const DESCRIPTION = 'creative technologist and multidisciplinary artist in milan. works across interactive installation, code, electronics, audiovisual, film and photography.';
 
 let html = fs.readFileSync(INDEX, 'utf8');
 
@@ -59,12 +89,12 @@ const person = { '@id': `${SITE}#person` };
 const graph = [
   {
     '@type': 'Person', '@id': `${SITE}#person`, name: PERSON.name,
-    jobTitle: PERSON.job, url: SITE,
+    jobTitle: PERSON.job, description: DESCRIPTION, url: SITE,
     address: { '@type': 'PostalAddress', addressLocality: PERSON.city, addressCountry: 'IT' },
     affiliation: { '@type': 'CollegeOrUniversity', name: 'Brera Academy of Fine Arts' },
     knowsAbout: PERSON.knowsAbout, sameAs: PERSON.sameAs
   },
-  { '@type': 'WebSite', '@id': `${SITE}#website`, url: SITE, name: PERSON.name, inLanguage: 'en', author: person },
+  { '@type': 'WebSite', '@id': `${SITE}#website`, url: SITE, name: PERSON.name, description: DESCRIPTION, inLanguage: 'en', author: person },
   {
     '@type': 'ItemList', name: 'Works', itemListElement: projects.map((p, i) => ({
       '@type': 'ListItem', position: i + 1,
@@ -106,7 +136,8 @@ const noscript = `<!-- NOSCRIPT:START (written by tools/build-seo.js) -->
   <noscript>
     <div style="position:fixed;inset:0;z-index:100;overflow:auto;background:#000;color:#fff;padding:1.5rem;font-family:'Syne Mono',monospace;font-size:0.8125rem;line-height:1.6">
       <h2 style="font-size:1rem">${esc(PERSON.name)} — portfolio</h2>
-      <p>${esc(PERSON.job)}, ${esc(PERSON.city)}. This portfolio is interactive: please enable JavaScript.</p>
+      <p>${esc(DESCRIPTION)}</p>
+      <p>This portfolio is interactive: please enable JavaScript.</p>
       <ul style="list-style:none;padding:0;margin:1.5rem 0">
 ${projects.map(p => `        <li style="margin-bottom:1rem"><strong>${esc(p.title)}</strong>${p.translation ? ` (${esc(p.translation)})` : ''} — ${esc(p.medium)}, ${esc(p.year)}${p.concept ? `<br>${esc(p.concept)}` : ''}</li>`).join('\n')}
       </ul>
